@@ -47,28 +47,38 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-// IntersectionObserver «следит», какой раздел сейчас на экране
+// Подсвечиваем пункт меню того раздела, который сейчас посередине экрана
 const navLinks = nav.querySelectorAll('a[href^="#"]:not(.btn)');
 const sections = [...navLinks]
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach((link) => {
-        const isCurrent = link.getAttribute('href') === `#${entry.target.id}`;
-        link.classList.toggle('is-active', isCurrent);
-        if (isCurrent) link.setAttribute('aria-current', 'true');
-        else link.removeAttribute('aria-current');
+function updateActiveLink() {
+  const middle = window.innerHeight / 2;
+  const atBottom =
+    window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+  // Подвал невысокий и до середины экрана не доезжает,
+  // поэтому в самом низу страницы считаем текущим последний раздел («Контакты»)
+  const current = atBottom
+    ? sections[sections.length - 1]
+    : sections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= middle && rect.bottom > middle;
       });
-    });
-  },
-  // раздел считается текущим, когда он пересекает середину экрана
-  { rootMargin: '-45% 0px -50% 0px' }
-);
-sections.forEach((section) => sectionObserver.observe(section));
+
+  // Если посередине раздел, которого нет в меню (например, бронь), — ничего не подсвечиваем
+  navLinks.forEach((link) => {
+    const isCurrent = Boolean(current) && link.getAttribute('href') === `#${current.id}`;
+    link.classList.toggle('is-active', isCurrent);
+    if (isCurrent) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
+  });
+}
+
+window.addEventListener('scroll', updateActiveLink, { passive: true });
+window.addEventListener('resize', updateActiveLink);
+updateActiveLink();
 
 // ==========================================================
 // 3. ПОЯВЛЕНИЕ БЛОКОВ ПРИ ПРОКРУТКЕ
