@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- Без этой строки сайт на телефоне будет выглядеть мелким -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кофейня «Зерно» — свежий кофе в центре города</title>
+  <meta name="description" content="Кофейня «Зерно»: кофе собственной обжарки, домашняя выпечка и уютная атмосфера. Ежедневно 8:00 — 22:00.">
+  <meta name="theme-color" content="#22160f">
+
+  <!-- Превью ссылки в мессенджерах и соцсетях -->
+  <meta property="og:title" content="Кофейня «Зерно»">
+  <meta property="og:description" content="Кофе собственной обжарки, домашняя выпечка и уютная атмосфера.">
+  <meta property="og:type" content="website">
+
+  <!-- Иконка во вкладке браузера: маленький SVG прямо в коде, отдельный файл не нужен -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='16' rx='10' ry='14' fill='%23a3521f'/%3E%3Cpath d='M16 3c-4 5 4 21 0 26' stroke='%23f8f3ec' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <!-- Шрифты с Google Fonts — оба поддерживают кириллицу и бесплатны для коммерции -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Сообщаем CSS, что JavaScript работает (нужно для анимаций появления) -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- Ссылка для тех, кто ходит по сайту клавиатурой: сразу к содержимому -->
+  <a href="#main" class="skip-link">Перейти к содержимому</a>
+
+  <!-- ===== ШАПКА ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="Зерно — на главную">
+        <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <ellipse cx="16" cy="16" rx="10" ry="14" />
+          <path d="M16 3c-4 5 4 21 0 26" />
+        </svg>
+        Зерно
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Основное меню">
+        <a href="#about">О нас</a>
+        <a href="#menu">Меню</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+        <a href="#booking" class="btn nav__btn">Забронировать стол</a>
+      </nav>
+
+      <a href="#booking" class="btn btn--small header__btn">Забронировать</a>
+
+      <!-- Кнопка-«бургер» для телефонов -->
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===== ПЕРВЫЙ ЭКРАН ===== -->
+    <section class="hero" id="top">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow">Кофе собственной обжарки</p>
+          <h1>Начни утро с&nbsp;<em>идеальной</em> чашки</h1>
+          <p class="hero__desc">
+            Обжариваем зерно каждую неделю, печём круассаны каждое утро
+            и&nbsp;знаем, как вы любите свой капучино.
+          </p>
+          <div class="hero__buttons">
+            <a href="#booking" class="btn">Забронировать стол</a>
+            <a href="#menu" class="btn btn--outline">Смотреть меню</a>
+          </div>
+          <ul class="hero__facts">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              Ежедневно 8:00 — 22:00
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              ул. Примерная, 12
+            </li>
+          </ul>
+        </div>
+
+        <!-- Иллюстрация: чашка капучино сверху. Нарисована SVG — не нужна картинка, чёткая на любом экране -->
+        <div class="hero__visual" aria-hidden="true">
+          <svg class="hero__ring" viewBox="0 0 400 400">
+            <defs>
+              <path id="ring-path" d="M200,200 m-182,0 a182,182 0 1,1 364,0 a182,182 0 1,1 -364,0" />
+            </defs>
+            <text>
+              <textPath href="#ring-path" textLength="1136" lengthAdjust="spacing">кофе собственной обжарки · свежая выпечка · кофе собственной обжарки · свежая выпечка ·</textPath>
+            </text>
+          </svg>
+          <svg class="hero__cup" viewBox="0 0 400 400">
+            <circle cx="200" cy="200" r="150" fill="#fffdf9" />
+            <circle cx="200" cy="200" r="150" fill="none" stroke="#e7d8c6" stroke-width="2" />
+            <circle cx="200" cy="200" r="118" fill="none" stroke="#efe2d2" stroke-width="2" />
+            <!-- ручка чашки -->
+            <rect x="300" y="186" width="72" height="28" rx="14" fill="#fffdf9" stroke="#e7d8c6" stroke-width="2" />
+            <circle cx="200" cy="200" r="104" fill="#fffdf9" stroke="#e7d8c6" stroke-width="2" />
+            <!-- кофе -->
+            <circle cx="200" cy="200" r="90" fill="#6b3a1c" />
+            <circle cx="200" cy="200" r="90" fill="none" stroke="#4a2510" stroke-width="6" opacity=".5" />
+            <!-- латте-арт: сердечко -->
+            <path d="M200 252c-30-22-52-40-52-64 0-16 12-28 27-28 11 0 19 6 25 15 6-9 14-15 25-15 15 0 27 12 27 28 0 24-22 42-52 64z" fill="#f3e2cc" />
+            <path d="M200 160v86" stroke="#c49a74" stroke-width="3" stroke-linecap="round" opacity=".6" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== О НАС / ПРЕИМУЩЕСТВА ===== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">О нас</p>
+          <h2 class="section__title">Почему к нам возвращаются</h2>
+        </div>
+        <div class="features">
+          <article class="feature reveal">
+            <div class="feature__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="6.5" ry="9" transform="rotate(30 12 12)"/><path d="M8.5 5.5c-1 4 6 9 7 13"/></svg>
+            </div>
+            <h3>Свежая обжарка</h3>
+            <p>Зерно из Эфиопии, Колумбии и Бразилии. Обжариваем сами — не дольше недели до вашей чашки.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="feature__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15c0-4 4-8 9-8s9 4 9 8"/><path d="M3 15h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 7.5 10 11M15 7.5 14 11"/></svg>
+            </div>
+            <h3>Своя выпечка</h3>
+            <p>Круассаны, синнабоны и чизкейки готовим на месте каждое утро.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="feature__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg>
+            </div>
+            <h3>Можно работать</h3>
+            <p>Быстрый Wi-Fi, розетки у каждого стола и тихая зона на втором этаже.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== МЕНЮ ===== -->
+    <section class="section section--dark" id="menu">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <p class="eyebrow eyebrow--light">Каждый день</p>
+          <h2 class="section__title">Меню</h2>
+        </div>
+
+        <!-- Вкладки: переключаются через JavaScript (script.js).
+             role и aria-* нужны, чтобы экранные дикторы понимали, что это вкладки -->
+        <div class="tabs" role="tablist" aria-label="Разделы меню">
+          <button class="tab tab--active" role="tab" aria-selected="true" aria-controls="menu-list" data-category="coffee">Кофе</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="menu-list" data-category="tea" tabindex="-1">Чай и не кофе</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="menu-list" data-category="food" tabindex="-1">Выпечка</button>
+        </div>
+
+        <div class="menu" id="menu-list" role="tabpanel" aria-live="polite">
+          <!-- Позиции меню добавляются из script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ОТЗЫВЫ ===== -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Отзывы</p>
+          <h2 class="section__title">Что говорят гости</h2>
+        </div>
+        <div class="reviews">
+          <figure class="review review--big reveal">
+            <blockquote>
+              <p>Лучший флэт уайт в городе. Хожу каждое утро перед работой уже полгода.</p>
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__avatar" aria-hidden="true">А</span>
+              Анна
+            </figcaption>
+          </figure>
+          <figure class="review reveal">
+            <blockquote>
+              <p>Очень уютно, удобно работать с ноутбуком. Синнабоны — отдельная любовь.</p>
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__avatar" aria-hidden="true">Д</span>
+              Дмитрий
+            </figcaption>
+          </figure>
+          <figure class="review reveal">
+            <blockquote>
+              <p>Бариста помнят мой заказ. Мелочь, а приятно!</p>
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__avatar" aria-hidden="true">Е</span>
+              Екатерина
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== БРОНИРОВАНИЕ (ФОРМА) ===== -->
+    <section class="section section--accent" id="booking">
+      <div class="container booking">
+        <div class="booking__intro reveal">
+          <p class="eyebrow">Бронь</p>
+          <h2 class="section__title">Забронировать стол</h2>
+          <p class="booking__text">Оставьте заявку — перезвоним в течение 15 минут и подтвердим бронь.</p>
+          <ul class="booking__info">
+            <li><span>Часы работы</span>Ежедневно 8:00 — 22:00</li>
+            <li><span>Телефон</span><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          </ul>
+        </div>
+
+        <!-- У каждого поля есть подпись <label> — так форма понятнее и удобнее (клик по подписи ставит курсор в поле) -->
+        <form class="form reveal" id="booking-form" novalidate>
+          <div class="field">
+            <label for="f-name">Ваше имя</label>
+            <input id="f-name" type="text" name="name" autocomplete="name" placeholder="Например, Анна" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">Телефон</label>
+            <input id="f-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <div class="form__row">
+            <div class="field">
+              <label for="f-date">Дата</label>
+              <input id="f-date" type="date" name="date" required>
+            </div>
+            <div class="field">
+              <label for="f-time">Время</label>
+              <input id="f-time" type="time" name="time" min="08:00" max="21:00" step="900" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-guests">Гостей</label>
+            <select id="f-guests" name="guests">
+              <option>1</option>
+              <option selected>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6 и больше</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn--full">Отправить заявку</button>
+          <!-- aria-live: экранный диктор прочитает сообщение, когда оно появится -->
+          <p class="form__message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== ПОДВАЛ / КОНТАКТЫ ===== -->
+  <footer class="footer" id="contacts">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#top" class="logo logo--light" aria-label="Зерно — наверх">
+          <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true">
+            <ellipse cx="16" cy="16" rx="10" ry="14" />
+            <path d="M16 3c-4 5 4 21 0 26" />
+          </svg>
+          Зерно
+        </a>
+        <p>Учебный проект для портфолио</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Адрес</h3>
+        <p>ул. Примерная, 12<br>Ежедневно 8:00 — 22:00</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Контакты</h3>
+        <p><a href="tel:+70000000000">+7 (000) 000-00-00</a><br>
+           <a href="mailto:hello@example.com">hello@example.com</a></p>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year">2026</span> Кофейня «Зерно»</p>
+      <a href="#top">Наверх ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

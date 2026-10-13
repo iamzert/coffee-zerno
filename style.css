@@ -1,0 +1,978 @@
+/* ==========================================================
+   ПЕРЕМЕННЫЕ — меняешь цвет здесь, и он меняется на всём сайте
+   Цвета подобраны так, чтобы текст хорошо читался (контраст ≥ 4.5:1)
+   ========================================================== */
+:root {
+  --color-bg: #f8f3ec;          /* кремовый фон */
+  --color-surface: #fffdf9;     /* карточки */
+  --color-sand: #efe2d2;        /* песочные секции */
+  --color-line: #e7d8c6;        /* тонкие линии и рамки */
+  --color-text: #2a1c13;        /* основной текст — тёмный эспрессо */
+  --color-muted: #6f5a4a;       /* второстепенный текст */
+  --color-accent: #a3521f;      /* терракота: кнопки, акценты */
+  --color-accent-dark: #84401a; /* кнопки при наведении */
+  --color-accent-light: #e6a46f;/* акцент на тёмном фоне */
+  --color-dark: #22160f;        /* тёмные секции */
+  --color-error: #b3261e;
+  --color-success: #2e6b45;
+
+  --radius: 20px;
+  --radius-small: 12px;
+  --shadow: 0 1px 2px rgba(42, 28, 19, 0.04), 0 12px 32px rgba(42, 28, 19, 0.07);
+  --header-height: 72px;
+
+  --font-title: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-text: 'Onest', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== СБРОС И БАЗА ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* плавная прокрутка по якорным ссылкам */
+  /* чтобы липкая шапка не закрывала заголовок раздела после перехода по ссылке */
+  scroll-padding-top: var(--header-height);
+}
+
+body {
+  font-family: var(--font-text);
+  font-size: 17px;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  line-height: 1.12;
+  text-wrap: balance; /* ровнее переносит строки заголовков */
+}
+
+p {
+  text-wrap: pretty;
+}
+
+svg {
+  display: block;
+}
+
+/* Видимая рамка фокуса для навигации с клавиатуры */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Ссылка «Перейти к содержимому»: спрятана, появляется при нажатии Tab */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Контейнер ограничивает ширину контента и центрирует его */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Маленькая подпись над заголовками */
+.eyebrow {
+  margin-bottom: 14px;
+  color: var(--color-accent);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrow--light {
+  color: var(--color-accent-light);
+}
+
+/* ===== КНОПКИ ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 2px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font: 600 16px var(--font-text);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.btn--outline:hover {
+  color: #fff;
+}
+
+.btn--small {
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+/* ===== ШАПКА ===== */
+.header {
+  position: sticky; /* шапка «прилипает» к верху при прокрутке */
+  top: 0;
+  z-index: 10;
+  background: rgba(248, 243, 236, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Класс добавляется из script.js, когда страницу прокрутили */
+.header--scrolled {
+  border-bottom-color: var(--color-line);
+  box-shadow: 0 6px 20px rgba(42, 28, 19, 0.05);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: var(--header-height);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.logo__mark {
+  width: 26px;
+  height: 26px;
+}
+
+.logo__mark ellipse {
+  fill: var(--color-accent);
+}
+
+.logo__mark path {
+  fill: none;
+  stroke: var(--color-bg);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.logo--light {
+  color: #fff;
+}
+
+.logo--light .logo__mark ellipse {
+  fill: var(--color-accent-light);
+}
+
+.logo--light .logo__mark path {
+  stroke: var(--color-dark);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav a:not(.btn) {
+  position: relative;
+  padding: 6px 0;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+/* Подчёркивание пункта меню: выезжает при наведении и у активного раздела */
+.nav a:not(.btn)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+}
+
+.nav a:not(.btn):hover,
+.nav a.is-active {
+  color: var(--color-accent);
+}
+
+.nav a:not(.btn):hover::after,
+.nav a.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Кнопка внутри меню видна только на телефоне */
+.nav__btn {
+  display: none;
+}
+
+.burger {
+  display: none; /* на компьютере бургер не нужен */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.burger span {
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-text);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Бургер превращается в крестик, когда меню открыто */
+.burger--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger--open span:nth-child(2) { opacity: 0; }
+.burger--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ===== ПЕРВЫЙ ЭКРАН ===== */
+.hero {
+  padding: 72px 0 104px;
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.hero h1 {
+  margin-bottom: 24px;
+  font-size: clamp(40px, 6.2vw, 76px); /* размер подстраивается под экран */
+  letter-spacing: -0.01em;
+}
+
+.hero h1 em {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.hero__desc {
+  max-width: 470px;
+  margin-bottom: 36px;
+  color: var(--color-muted);
+  font-size: 19px;
+}
+
+.hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 15px;
+}
+
+.hero__facts li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__facts svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Иллюстрация с чашкой */
+.hero__visual {
+  position: relative;
+  width: min(460px, 100%);
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+.hero__visual::before {
+  content: '';
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: var(--color-sand);
+}
+
+.hero__ring,
+.hero__cup {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__ring {
+  animation: spin 40s linear infinite;
+}
+
+.hero__ring text {
+  fill: var(--color-muted);
+  font: 500 13.5px var(--font-text);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero__cup {
+  inset: 12%;
+  width: 76%;
+  height: 76%;
+  filter: drop-shadow(0 24px 30px rgba(42, 28, 19, 0.16));
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* ===== СЕКЦИИ ===== */
+.section {
+  padding: 112px 0;
+}
+
+.section--dark {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.section--accent {
+  background: var(--color-sand);
+}
+
+.section__head {
+  margin-bottom: 56px;
+}
+
+.section__head--center {
+  text-align: center;
+}
+
+.section__title {
+  font-size: clamp(32px, 4.4vw, 52px);
+}
+
+/* ===== ПРЕИМУЩЕСТВА ===== */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature {
+  padding: 36px 32px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.feature__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background: var(--color-sand);
+}
+
+.feature__icon svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feature h3 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.feature p {
+  color: var(--color-muted);
+}
+
+/* ===== МЕНЮ ===== */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 48px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+
+.tab {
+  min-height: 44px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font: 500 15px var(--font-text);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tab--active,
+.tab--active:hover {
+  background: var(--color-accent-light);
+  color: var(--color-dark);
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 64px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.menu-item {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.35s ease both;
+}
+
+/* Название — точки — цена, как в настоящем меню */
+.menu-item__top {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.menu-item__name {
+  font-family: var(--font-title);
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.menu-item__dots {
+  flex: 1;
+  min-width: 24px;
+  border-bottom: 2px dotted rgba(255, 255, 255, 0.25);
+  transform: translateY(-5px);
+}
+
+.menu-item__price {
+  color: var(--color-accent-light);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.menu-item__desc {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== ОТЗЫВЫ ===== */
+.reviews {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 24px;
+}
+
+.review {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 72px 32px 32px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+/* Большая декоративная кавычка */
+.review::before {
+  content: '“';
+  position: absolute;
+  top: 12px;
+  left: 28px;
+  color: var(--color-accent);
+  font: 700 88px/1 var(--font-title);
+}
+
+.review p {
+  font-size: 18px;
+}
+
+.review--big {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: #fff;
+}
+
+.review--big::before {
+  color: var(--color-accent-light);
+}
+
+.review--big p {
+  font-family: var(--font-title);
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.35;
+}
+
+.review__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.review__avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-sand);
+  color: var(--color-accent-dark);
+  font-family: var(--font-title);
+  font-size: 18px;
+}
+
+.review--big .review__avatar {
+  background: var(--color-accent-light);
+  color: var(--color-dark);
+}
+
+/* ===== ФОРМА ===== */
+.booking {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.booking .section__title {
+  margin-bottom: 16px;
+}
+
+.booking__text {
+  max-width: 440px;
+  margin-bottom: 32px;
+  color: var(--color-muted);
+  font-size: 18px;
+}
+
+.booking__info {
+  display: grid;
+  gap: 16px;
+}
+
+.booking__info li {
+  display: grid;
+  gap: 2px;
+  font-weight: 500;
+}
+
+.booking__info span {
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.booking__info a:hover {
+  color: var(--color-accent);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 36px;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form input,
+.form select {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-small);
+  background: #fff;
+  font: 16px var(--font-text); /* 16px — чтобы iPhone не увеличивал страницу при вводе */
+  color: var(--color-text);
+  transition: border-color 0.2s;
+}
+
+.form select {
+  appearance: none;
+  cursor: pointer;
+  /* стрелочка у выпадающего списка */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f5a4a' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px;
+}
+
+.form input:hover,
+.form select:hover {
+  border-color: #d4bfa8;
+}
+
+.form input:focus,
+.form select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(163, 82, 31, 0.18);
+}
+
+.form input.input--error {
+  border-color: var(--color-error);
+}
+
+.form .btn {
+  margin-top: 8px;
+}
+
+.form__message {
+  min-height: 24px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.form__message--success { color: var(--color-success); }
+.form__message--error   { color: var(--color-error); }
+
+/* ===== ПОДВАЛ ===== */
+.footer {
+  padding: 72px 0 32px;
+  background: var(--color-dark);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 48px;
+}
+
+.footer__brand .logo {
+  margin-bottom: 12px;
+}
+
+.footer__title {
+  margin-bottom: 10px;
+  color: #fff;
+  font-family: var(--font-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.footer a:hover {
+  color: var(--color-accent-light);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+}
+
+/* ===== ПОЯВЛЕНИЕ БЛОКОВ ПРИ ПРОКРУТКЕ =====
+   Работает, только если включён JavaScript (класс .js на <html>),
+   иначе блоки просто видны сразу */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================
+   АДАПТИВ — стили для планшетов и телефонов
+   ========================================================== */
+@media (max-width: 960px) {
+  .hero__inner,
+  .booking {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__visual {
+    order: -1; /* картинка над текстом */
+    width: min(340px, 80%);
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .review--big {
+    grid-column: 1 / -1; /* большой отзыв на всю ширину */
+  }
+
+  .menu {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .header__btn {
+    display: none;
+  }
+
+  /* Меню выезжает сверху вниз при нажатии на бургер */
+  .nav {
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0 16px;
+    background: var(--color-bg);
+    box-shadow: 0 16px 24px rgba(42, 28, 19, 0.08);
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden; /* скрытые ссылки не ловят фокус с клавиатуры */
+    transition: max-height 0.35s ease, padding 0.35s ease, visibility 0.35s;
+  }
+
+  .nav--open {
+    max-height: 420px;
+    padding: 8px 16px 20px;
+    visibility: visible;
+  }
+
+  .nav a:not(.btn) {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 18px;
+  }
+
+  .nav a:not(.btn)::after {
+    display: none;
+  }
+
+  .nav__btn {
+    display: inline-flex;
+    margin-top: 16px;
+  }
+
+  .hero {
+    padding: 32px 0 72px;
+  }
+
+  .hero__buttons .btn {
+    flex: 1 1 200px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .section__head {
+    margin-bottom: 36px;
+  }
+
+  .tabs {
+    gap: 4px;
+    border-radius: 24px;
+  }
+
+  .tab {
+    padding: 0 14px;
+    font-size: 14px;
+  }
+
+  .reviews,
+  .form__row,
+  .footer__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .form {
+    padding: 24px 20px;
+  }
+
+  .booking {
+    gap: 40px;
+  }
+}
+
+/* Если человек отключил анимации в настройках системы — уважаем это */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
